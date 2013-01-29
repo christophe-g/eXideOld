@@ -210,21 +210,21 @@ eXide.util = (function () {
 		/**
 		 * Normalize a collection path. Remove xmldb: part, resolve ..
 		 */
-		normalizePath: function (path) {
-            if (!path)
-                return path;
-			path = path.replace(/^xmldb:exist:\/\//, "");
-			var newComponents = [];
-			var components = path.split("/");
-			for (var i = components.length - 1; i > -1; i--) {
-				if (components[i] == "..") {
-					i--;
-				} else {
-					newComponents.push(components[i]);
-				}
-			}
-			return newComponents.reverse().join("/");
-		},
+		 normalizePath : function (path) {
+                            if (!path)
+                            return path;
+                            path = path.replace(/^xmldb:exist:\/\//, "");
+                            var newComponents = [];
+                            var components = path.split("/"), length = components.length;
+                            for (var i = 0 ; i < length; i++) {
+                                if (components[i] == ".." ) {
+                                    newComponents.pop();
+                                } else {
+                                    newComponents.push(components[i]);
+                                }
+                            }
+                            return newComponents.join('/');
+                       },
 		
 		/**
 		 * Parse a function signature and transform it into function call.
